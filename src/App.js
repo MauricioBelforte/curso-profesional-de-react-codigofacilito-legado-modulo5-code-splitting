@@ -1,8 +1,11 @@
 
 import './App.css';
-import { SorpresaClase26 } from './modulo4-Code-Splitting/clase2/SorpresaClase26';
-import { SorpresaClase27 } from './modulo4-Code-Splitting/clase3/SorpresaClase27';
-import { useEffect, useState } from 'react';
+/* import { SorpresaClase26 } from './modulo4-Code-Splitting/clase2/SorpresaClase26'; */
+/* import { SorpresaClase27 } from './modulo4-Code-Splitting/clase3/SorpresaClase27'; */
+import React, { useEffect, useState, Suspense } from 'react';
+
+
+const SorpresaClase28 = React.lazy(() => import('./modulo4-Code-Splitting/clase4/SorpresaClase28'))
 
 function App() {
   const [showSorpresa, setShowSorpresa] = useState(false)
@@ -17,7 +20,7 @@ function App() {
         Mostrar sorpresa
       </button>
       {
-        showSorpresa && <SorpresaClase27 />
+        showSorpresa && <Suspense fallback={<p> Cargando... </p>}> <SorpresaClase28 /> </Suspense>
       }
 
 
