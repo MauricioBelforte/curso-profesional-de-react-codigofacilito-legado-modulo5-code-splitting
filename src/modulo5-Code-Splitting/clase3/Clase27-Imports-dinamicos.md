@@ -23,9 +23,9 @@ Agregamos un hook `useEffect` en `App.js` para poder agregar una actualización 
 
 ### Código
 ```jsx
-useEffect(() => { 
-  import("./modulo4-Code-Splitting/clase3/hello").then(modulo => modulo.default())
-}, []);
+ useEffect(() => {
+    import("./hello").then(modulo => modulo.default())
+  }, []);
 ```
 
 ### Explicación Detallada
@@ -34,7 +34,7 @@ useEffect(() => {
    - `useEffect` es un Hook de React que permite realizar efectos secundarios en componentes funcionales. Se ejecuta después de que el componente se ha renderizado.
    - En este caso, `useEffect` se ejecutará una vez al montarse el componente porque el segundo argumento es un array vacío `[]`.
 
-2. **`import("./modulo4-Code-Splitting/clase3/hello")`**:
+2. **`import("./hello")`**:
    - Este es un import dinámico. En lugar de importar el módulo en la parte superior del archivo, se importa dentro de `useEffect` cuando se necesita.
    - `import()` devuelve una promesa que se resuelve con el módulo importado.
    - Es decir que trae un objeto que le pediremos la funcion que trae por defecto.
@@ -54,18 +54,45 @@ El código está configurado para que, cuando el componente se monte, haga una i
 
 Con F2 se puede ver que el archivo `hello.js` está aparte de los chunks.js tradicionales. Esto quiere decir que ya no se descarga todo de una sola vez.
 
+
+
+
+
 ### Función Principal:
 ```jsx
 import './App.css';
-import { SorpresaClase26 } from './modulo4-Code-Splitting/clase2/SorpresaClase26';
-import { SorpresaClase27 } from './modulo4-Code-Splitting/clase3/SorpresaClase27';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import Clase26CodeSplittingEnPractica from './modulo5-Code-Splitting/clase2/Clase26CodeSplittingEnPractica';
+import Clase27ImportsDinamicos from './modulo5-Code-Splitting/clase3/Clase27ImportsDinamicos';
+
 
 function App() {
+
+  return (
+    <div>
+      <Clase27ImportsDinamicos />
+      {/* <Clase26CodeSplittingEnPractica /> */}
+    </div>
+  )
+ 
+}
+
+export default App;
+
+```
+
+### El Componente de la Clase 27: 
+```jsx
+
+
+import { SorpresaClase27 } from './SorpresaClase27';
+import { useState , useEffect } from 'react';
+
+function Clase27ImportsDinamicos() {
   const [showSorpresa, setShowSorpresa] = useState(false);
 
   useEffect(() => {
-    import("./modulo4-Code-Splitting/clase3/hello").then(modulo => modulo.default())
+    import("./hello").then(modulo => modulo.default())
   }, []);
 
   return (
@@ -80,10 +107,12 @@ function App() {
   );
 }
 
-export default App;
+
+export default Clase27ImportsDinamicos;
 ```
 
-### El Componente:
+
+### El Componente sorpresa:
 ```jsx
 import React from "react";
 
@@ -98,20 +127,25 @@ const SorpresaClase27 = () => {
 export { SorpresaClase27 }
 ```
 
+
+
+
+
+
 ### Importar Función de la Manera Tradicional:
 Si quisiéramos corroborar cómo carga junto a los chunks.js tradicionales, podemos dejar comentado el import dinámico,e importar la función de la manera tradicional así:
 
 ```jsx
 import './App.css';
-import { SorpresaClase27 } from './modulo4-Code-Splitting/clase3/SorpresaClase27';
+import { SorpresaClase27 } from './SorpresaClase27';
 import { useEffect, useState } from 'react';
-import hello from './modulo4-Code-Splitting/clase3/hello';
+import hello from './hello';
 
 function App() {
   const [showSorpresa, setShowSorpresa] = useState(false);
 
   useEffect(() => {
-    /*  import("./modulo4-Code-Splitting/clase3/hello").then(modulo => modulo.default()) */
+    /*  import("./hello").then(modulo => modulo.default()) */
   }, []);
 
   return (

@@ -57,6 +57,81 @@ Y usarlo de esta manera:
 ```
 
 
+Quedando el código de la App principal:
+
+```jsx
+
+import './App.css';
+import React from 'react';
+import Clase26CodeSplittingEnPractica from './modulo5-Code-Splitting/clase2/Clase26CodeSplittingEnPractica';
+import Clase27ImportsDinamicos from './modulo5-Code-Splitting/clase3/Clase27ImportsDinamicos';
+import Clase28ReactLazyYSuspense from './modulo5-Code-Splitting/clase4/Clase28ReactLazyYSuspense';
+
+
+function App() {
+
+  return (
+    <div>
+      <Clase28ReactLazyYSuspense />
+      {/* 
+      <Clase27ImportsDinamicos />
+      <Clase26CodeSplittingEnPractica /> 
+      */}
+    </div>
+  )
+
+}
+
+export default App;
+```
+El componente de la clase:
+
+```jsx
+
+
+import React, { useState , Suspense } from 'react';
+
+
+
+ const SorpresaClase28 = React.lazy(() => import('./SorpresaClase28'))
+ 
+function Clase28ReactLazyYSuspense() {
+  const [showSorpresa, setShowSorpresa] = useState(false);
+
+
+
+  return (
+    <div >
+      <button onClick={(ev) => setShowSorpresa(true)}>
+        Mostrar sorpresa
+      </button>
+      {
+        showSorpresa && <Suspense fallback={<p> Cargando... </p>}> <SorpresaClase28 /> </Suspense>
+      }
+    </div>
+  );
+}
+
+
+export default Clase28ReactLazyYSuspense;
+```
+
+El componente Sorpresa:
+
+```javascript
+import React from "react";
+
+const SorpresaClase28 = () => {
+  return (
+    <div>
+      <p>Sorpresa</p>
+      </div>
+  );
+}
+
+export default SorpresaClase28;
+
+```
 
 
 Con F12 se puede ver que figura "cargando" hasta que se carga el componente. Cuando React se encuentra con un componente que se carga de manera dinámica, busca el `Suspense` más cercano y sustituye todo lo que está dentro de `<Suspense>...</Suspense>` por lo que está dentro del fallback.

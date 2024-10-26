@@ -37,14 +37,16 @@ const SorpresaClase26 = () => {
 export { SorpresaClase26 };
 ```
 
-Y en la app principal vamos a llamar al componente cuando se presiona el botón **Mostrar sorpresa**. Usamos el hook `useState` para inicializar un estado y modificarlo cuando se presione el botón:
+Y en la app principal App.js vamos a agregar un componente por clase, y de alli vamos a llamar al componente Sorpresa cuando se presiona el botón **Mostrar sorpresa**.
+Usamos el hook `useState` para inicializar un estado y modificarlo cuando se presione el botón:
+
 
 ```javascript
-import './App.css';
-import { SorpresaClase26 } from './modulo4-Code-Splitting/clase2/SorpresaClase26';
+
+import { SorpresaClase26 } from './SorpresaClase26';
 import { useState } from 'react';
 
-function App() {
+function Clase26CodeSplittingEnPractica() {
   const [showSorpresa, setShowSorpresa] = useState(false);
 
   return (
@@ -57,5 +59,42 @@ function App() {
   );
 }
 
-export default App;
+export default Clase26CodeSplittingEnPractica;
 ```
+
+
+Y en la App principal:
+
+
+```javascript
+import './App.css';
+import React from 'react';
+import Clase26CodeSplittingEnPractica from './modulo5-Code-Splitting/clase2/Clase26CodeSplittingEnPractica';
+
+function App() {
+
+  return (
+    <Clase26CodeSplittingEnPractica />
+  )
+
+}
+
+export default App;
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
